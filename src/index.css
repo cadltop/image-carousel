@@ -1,0 +1,27 @@
+:root {
+  --slides-width: 600px;
+  --slides-heigth: 337px;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#frame {
+  border: 4px black solid;
+  width: fit-content;
+  height: fit-content;
+}
+
+#slide {
+  width: var(--slides-width);
+  height: var(--slides-heigth);
+}
+
+img {
+  width: var(--slides-width);
+  height: var(--slides-heigth);
+}

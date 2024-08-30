@@ -8,6 +8,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: grey;
 }
 
 #frame {
@@ -15,13 +16,17 @@ body {
   width: fit-content;
   height: fit-content;
 }
+img[src$=".svg"] {
+  width: 300px;
+  height: 300px;
+}
 
 #slide {
   width: var(--slides-width);
   height: var(--slides-heigth);
 }
 
-img {
+#slide > img {
   width: var(--slides-width);
   height: var(--slides-heigth);
 }

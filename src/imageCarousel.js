@@ -1,5 +1,8 @@
-export default function (imgCollection = []) {
+export default function (imgCollection = [], previousTrigger, nextTrigger) {
   let index = 0;
+
+  previousTrigger.onclick = previous;
+  nextTrigger.onclick = next;
 
   function showImage(position = index) {
     imgCollection[position].style.display = "inline";

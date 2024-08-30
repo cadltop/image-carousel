@@ -1,6 +1,7 @@
 :root {
   --slides-width: 600px;
   --slides-heigth: 337px;
+  --arrows-size: 300px;
 }
 body {
   width: 100vw;
@@ -11,21 +12,32 @@ body {
   background-color: grey;
 }
 
+#container {
+  width: fit-content;
+  height: fit-content;
+  display: grid;
+
+  grid-template:
+    var(--slides-heigth) /
+    var(--arrows-size) var(--slides-width) var(--arrows-size);
+
+  justify-items: center;
+  align-items: center;
+  gap: 20px;
+}
+
 #frame {
+  grid-area: 1 / 2 / 2 / 3;
   border: 4px black solid;
   width: fit-content;
   height: fit-content;
 }
 img[src$=".svg"] {
-  width: 300px;
-  height: 300px;
+  width: var(--arrows-size);
+  height: var(--arrows-size);
 }
 
-#slide {
-  width: var(--slides-width);
-  height: var(--slides-heigth);
-}
-
+#slide,
 #slide > img {
   width: var(--slides-width);
   height: var(--slides-heigth);

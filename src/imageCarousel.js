@@ -13,20 +13,19 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
   function previous() {
     if (index > 0) {
       index -= 1;
-      showImage(index);
     } else {
       index = imgCollection.length - 1;
-      showImage(index);
     }
+    showImage(index);
   }
   function next() {
     if (index < imgCollection.length - 1) {
       index += 1;
-      showImage(index);
     } else {
       index = 0;
-      showImage(index);
     }
+    showImage(index);
   }
+
   return { showImage };
 }

@@ -55,5 +55,10 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
       };
     }
   }
+
+  showImage();
+  makeDots();
+  fillDot();
+
   return { showImage, makeDots, fillDot };
 }

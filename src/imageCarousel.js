@@ -3,6 +3,7 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
 
   const container = document.querySelector("div#container");
   const dotsContainer = document.createElement("div");
+  dotsContainer.id = "dots-container";
   container.append(dotsContainer);
 
   for (let i = 0; i < imgCollection.length; i++) {

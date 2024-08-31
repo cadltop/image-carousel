@@ -1,6 +1,11 @@
 export default function (imgCollection = [], previousTrigger, nextTrigger) {
   let index = 0;
 
+  const container = document.querySelector("div#container");
+  const dotsContainer = document.createElement("div");
+  dotsContainer.id = "dots-container";
+  container.append(dotsContainer);
+
   previousTrigger.onclick = previous;
   nextTrigger.onclick = next;
 
@@ -10,6 +15,14 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
       if (i !== position) imgCollection[i].style.display = "none";
     }
   }
+  function fillDot(position = index) {
+    const dots = dotsContainer.children;
+    dots[position].style.backgroundColor = "black";
+    for (let i = 0; i < dots.length; i++) {
+      if (dots[i] !== dots[position]) dots[i].style.backgroundColor = "white";
+    }
+  }
+
   function previous() {
     if (index > 0) {
       index -= 1;
@@ -17,6 +30,7 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
       index = imgCollection.length - 1;
     }
     showImage(index);
+    fillDot(index);
   }
   function next() {
     if (index < imgCollection.length - 1) {
@@ -25,28 +39,19 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
       index = 0;
     }
     showImage(index);
+    fillDot(index);
   }
-  function makeDots() {
-    const container = document.querySelector("div#container");
-    const dotsContainer = document.createElement("div");
-    dotsContainer.id = "dots-container";
-    container.append(dotsContainer);
 
+  function makeDots() {
     for (let i = 0; i < imgCollection.length; i++) {
       const dot = document.createElement("div");
       dot.className = "dot";
       dotsContainer.append(dot);
       dot.onclick = function () {
         showImage(i);
-        dot.style.backgroundColor = "black";
-        const dots = dotsContainer.children;
-        for (let i = 0; i < dots.length; i++) {
-          if (dots[i] !== dot) dots[i].style.backgroundColor = "white";
-        }
+        fillDot(i);
       };
     }
-    dotsContainer.children[0].style.backgroundColor = "black";
   }
-
-  return { showImage, makeDots };
+  return { showImage, makeDots, fillDot };
 }

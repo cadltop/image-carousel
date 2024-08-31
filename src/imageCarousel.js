@@ -1,17 +1,6 @@
 export default function (imgCollection = [], previousTrigger, nextTrigger) {
   let index = 0;
 
-  const container = document.querySelector("div#container");
-  const dotsContainer = document.createElement("div");
-  dotsContainer.id = "dots-container";
-  container.append(dotsContainer);
-
-  for (let i = 0; i < imgCollection.length; i++) {
-    const dot = document.createElement("div");
-    dot.className = "dot";
-    dotsContainer.append(dot);
-  }
-
   previousTrigger.onclick = previous;
   nextTrigger.onclick = next;
 
@@ -37,6 +26,27 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
     }
     showImage(index);
   }
+  function makeDots() {
+    const container = document.querySelector("div#container");
+    const dotsContainer = document.createElement("div");
+    dotsContainer.id = "dots-container";
+    container.append(dotsContainer);
 
-  return { showImage };
+    for (let i = 0; i < imgCollection.length; i++) {
+      const dot = document.createElement("div");
+      dot.className = "dot";
+      dotsContainer.append(dot);
+      dot.onclick = function () {
+        showImage(i);
+        dot.style.backgroundColor = "black";
+        const dots = dotsContainer.children;
+        for (let i = 0; i < dots.length; i++) {
+          if (dots[i] !== dot) dots[i].style.backgroundColor = "white";
+        }
+      };
+    }
+    dotsContainer.children[0].style.backgroundColor = "black";
+  }
+
+  return { showImage, makeDots };
 }

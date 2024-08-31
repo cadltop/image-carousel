@@ -13,6 +13,8 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
   previousTrigger.onclick = previous;
   nextTrigger.onclick = next;
 
+  setInterval(next, 5000);
+
   function showImageAndFillDot(position = index) {
     setElementStyle(imgCollection, "display", position, "inline", "none");
     setElementStyle(dots, "backgroundColor", position, "black", "white");
@@ -32,6 +34,16 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
       }
     }
   }
+  function makeDots() {
+    for (let i = 0; i < imgCollection.length; i++) {
+      const dot = document.createElement("div");
+      dot.className = "dot";
+      dotsContainer.append(dot);
+      dot.onclick = function () {
+        showImageAndFillDot(i);
+      };
+    }
+  }
 
   function previous() {
     if (index > 0) {
@@ -48,16 +60,5 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
       index = 0;
     }
     showImageAndFillDot(index);
-  }
-
-  function makeDots() {
-    for (let i = 0; i < imgCollection.length; i++) {
-      const dot = document.createElement("div");
-      dot.className = "dot";
-      dotsContainer.append(dot);
-      dot.onclick = function () {
-        showImageAndFillDot(i);
-      };
-    }
   }
 }

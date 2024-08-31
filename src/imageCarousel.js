@@ -10,12 +10,14 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
   nextTrigger.onclick = next;
 
   function showImage(position = index) {
+    index = position;
     imgCollection[position].style.display = "inline";
     for (let i = 0; i < imgCollection.length; i++) {
       if (i !== position) imgCollection[i].style.display = "none";
     }
   }
   function fillDot(position = index) {
+    index = position;
     const dots = dotsContainer.children;
     dots[position].style.backgroundColor = "black";
     for (let i = 0; i < dots.length; i++) {

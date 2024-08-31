@@ -1,7 +1,11 @@
-export default function (imgCollection = [], previousTrigger, nextTrigger) {
+export default function (
+  container,
+  imgCollection,
+  previousTrigger,
+  nextTrigger,
+) {
   let index = 0;
 
-  const container = document.querySelector("div#container");
   const dotsContainer = document.createElement("div");
   dotsContainer.id = "dots-container";
   const dots = dotsContainer.children;

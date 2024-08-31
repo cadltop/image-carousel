@@ -4,24 +4,32 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
   const container = document.querySelector("div#container");
   const dotsContainer = document.createElement("div");
   dotsContainer.id = "dots-container";
+  const dots = dotsContainer.children;
   container.append(dotsContainer);
+
+  makeDots();
+  showImageAndFillDot();
 
   previousTrigger.onclick = previous;
   nextTrigger.onclick = next;
 
-  function showImage(position = index) {
-    index = position;
-    imgCollection[position].style.display = "inline";
-    for (let i = 0; i < imgCollection.length; i++) {
-      if (i !== position) imgCollection[i].style.display = "none";
-    }
-  }
-  function fillDot(position = index) {
-    index = position;
-    const dots = dotsContainer.children;
-    dots[position].style.backgroundColor = "black";
-    for (let i = 0; i < dots.length; i++) {
-      if (dots[i] !== dots[position]) dots[i].style.backgroundColor = "white";
+  function showImageAndFillDot(position = index) {
+    setElementStyle(imgCollection, "display", position, "inline", "none");
+    setElementStyle(dots, "backgroundColor", position, "black", "white");
+
+    function setElementStyle(
+      elementList,
+      styleRule,
+      elementPosition,
+      selectedValue,
+      siblingsValue,
+    ) {
+      index = elementPosition;
+      elementList[elementPosition].style[styleRule] = selectedValue;
+      for (let i = 0; i < elementList.length; i++) {
+        if (i !== elementPosition)
+          elementList[i].style[styleRule] = siblingsValue;
+      }
     }
   }
 
@@ -31,8 +39,7 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
     } else {
       index = imgCollection.length - 1;
     }
-    showImage(index);
-    fillDot(index);
+    showImageAndFillDot(index);
   }
   function next() {
     if (index < imgCollection.length - 1) {
@@ -40,8 +47,7 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
     } else {
       index = 0;
     }
-    showImage(index);
-    fillDot(index);
+    showImageAndFillDot(index);
   }
 
   function makeDots() {
@@ -50,15 +56,8 @@ export default function (imgCollection = [], previousTrigger, nextTrigger) {
       dot.className = "dot";
       dotsContainer.append(dot);
       dot.onclick = function () {
-        showImage(i);
-        fillDot(i);
+        showImageAndFillDot(i);
       };
     }
   }
-
-  showImage();
-  makeDots();
-  fillDot();
-
-  return { showImage, makeDots, fillDot };
 }

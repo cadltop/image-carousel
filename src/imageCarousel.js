@@ -1,6 +1,16 @@
 export default function (imgCollection = [], previousTrigger, nextTrigger) {
   let index = 0;
 
+  const container = document.querySelector("div#container");
+  const dotsContainer = document.createElement("div");
+  container.append(dotsContainer);
+
+  for (let i = 0; i < imgCollection.length; i++) {
+    const dot = document.createElement("div");
+    dot.className = "dot";
+    dotsContainer.append(dot);
+  }
+
   previousTrigger.onclick = previous;
   nextTrigger.onclick = next;
 
